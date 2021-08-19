@@ -1,0 +1,59 @@
+<div *ngIf="dashboardData" class="dashboard">
+  <div class="dashboard-header">
+    <app-power-meter [power]="usedPower"></app-power-meter>
+    <h3>
+      Fast Charging: {{ fastCharging }} <br/>
+      Normal Charging: {{ normalCharging }}
+    </h3>
+  </div>
+
+  <table mat-table [dataSource]="dashboardData" class="mat-elevation-z8">
+
+    <!-- Id Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> ID </th>
+      <td mat-cell *matCellDef="let chargingPoint"> {{chargingPoint.id}} </td>
+    </ng-container>
+  
+    <!-- Connected Time Column -->
+    <ng-container matColumnDef="connectedTime">
+      <th mat-header-cell *matHeaderCellDef> Connected Time </th>
+      <td mat-cell *matCellDef="let chargingPoint"> {{ (chargingPoint.time | async) || '-' }} </td>
+    </ng-container>
+  
+    <!-- Power Column -->
+    <ng-container matColumnDef="power">
+      <th mat-header-cell *matHeaderCellDef> Power </th>
+      <td mat-cell *matCellDef="let chargingPoint">
+        <span *ngIf="!chargingPoint.power">{{'-' }}</span>
+        <mat-icon *ngIf="chargingPoint.power === 20" [style.color]="'green'">battery_charging_full</mat-icon>
+        <mat-icon *ngIf="chargingPoint.power === 10" [style.color]="'yellowgreen'">battery_saver</mat-icon>
+      </td>
+    </ng-container>
+  
+    <!-- Occupied Column -->
+    <ng-container matColumnDef="occupied">
+      <th mat-header-cell *matHeaderCellDef> Occupied </th>
+      <td mat-cell *matCellDef="let chargingPoint">
+        <mat-icon *ngIf="!chargingPoint.occupied" aria-hidden="false" aria-label="Example home icon">power_off</mat-icon>
+        <mat-icon *ngIf="chargingPoint.occupied" [style.color]="'green'" aria-hidden="false" aria-label="Example home icon">power</mat-icon>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <td mat-cell *matCellDef="let chargingPoint">
+        <mat-slide-toggle
+          [color]="chargingPoint.occupied ? 'warn' : 'primary'"
+          [checked]="chargingPoint.occupied"
+          (change)="toggleEV($event, chargingPoint.id)"
+        >
+        {{ chargingPoint.occupied ? 'Unplug' : 'Plug-In' }}
+      </mat-slide-toggle>
+      </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

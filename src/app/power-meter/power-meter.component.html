@@ -1,0 +1,11 @@
+
+<div class="power-meter-wrapper">
+  <h3 [style.margin-right.px]="10">Power <br/> Consumption</h3>
+  <div class="power-meter">
+    <span class="power-value">{{power + '%'}}</span>
+    <div class="power-bar"
+      [ngClass]="'power-bar-color-' + power"
+      [style.width]="power + '%'">
+    </div>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+.power-meter-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+.power-meter {
+  height: 40px;
+  width: 120px;
+  border: 1px solid #d8d8d8;
+  position: relative;
+}
+
+.power-bar {
+  height: inherit;
+  background-color: lawngreen;
+  transition: ease all .2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.power-value {
+  position: absolute;
+  font-weight: 500;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.power-bar-color-10, .power-bar-color-20, .power-bar-color-30 {
+  background-color: rgb(61, 184, 255);
+}
+
+.power-bar-color-40, .power-bar-color-60, .power-bar-color-70 {
+  background-color: rgb(117, 226, 7);
+}
+
+.power-bar-color-80, .power-bar-color-90 {
+  background-color: rgb(255, 160, 51);
+}
+
+.power-bar-color-100 {
+  background-color: rgba(235, 17, 17, 0.596);
+}

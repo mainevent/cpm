@@ -1,0 +1,14 @@
+table {
+  width: 100%;
+}
+
+.dashboard {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-top: 30px;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+}
